@@ -24,15 +24,15 @@ class To5vStrokes():
 
 
 class V5Dataset(torch.utils.data.Dataset):
-    def __init__(self, data_path, transform=None, pre_scaling=True):
+    def __init__(self, data_path, split='train', transform=None, pre_scaling=True):
         super().__init__()
         self.transform = transform
-        self.data = np.load(data_path, encoding='bytes', allow_pickle=True)
+        self.data = np.load(data_path, encoding='latin1', allow_pickle=True)[split]
         scale = self.scaling_factor()
         self.data = np.array(list(
-            map(lambda x: self.scale_stroke(x, scale), self.data)))
+            map(lambda x: self.scale_stroke(x, scale), self.data)), dtype='object')
         if transform is not None:
-            self.data = np.array(list(map(transform, self.data)))
+            self.data = np.array(list(map(transform, self.data)), dtype='object')
 
     def __len__(self):
         return self.data.shape[0]

@@ -7,3 +7,4 @@ __pycache__/dataset.cpython-37.pyc
 __pycache__/trainer.cpython-37.pyc
 __pycache__/utils.cpython-37.pyc
 debug_*
+__pycache__/
